@@ -23,9 +23,16 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 export const StarList = ({data}) => {
-
-
-
+  const dispatch = useContext(DispatchContext);
+  
+  const onClickIsStar = (e, id) => {
+    dispatch({
+      type : 'star',
+      payload : {
+        id
+      }
+    });
+  };
   
   return (
     <Container sx={{mt: 2, mb:10}}>
@@ -46,21 +53,15 @@ export const StarList = ({data}) => {
               sx={{ cursor: 'pointer' }}
             >
               <StyledTableCell component="th" scope="row">
-
-
-
+               {d.fromText}（{d.fromLang}）
               </StyledTableCell>
               <StyledTableCell component="th" scope="row">
-
-
-
+               {d.toText}（{d.toLang}）
               </StyledTableCell>
               <StyledTableCell component="th" scope="row">
                 <IconButton
                   aria-label="star"
-
-
-
+                  onClick={(e) => onClickIsStar(e,d.id)}
                 >
                   <Star {...d} />
                 </IconButton>
